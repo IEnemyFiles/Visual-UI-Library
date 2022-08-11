@@ -37,6 +37,24 @@ end)
 local Colorpicker = Section:CreateColorpicker('Colorpicker', 0.25, function(Value)
     print(Value)
 end)
+    
+local UpdateSection = Tab:CreateSection('Update Functions')
+
+local LabelBox = UpdateSection:CreateTextbox('Update Label', 'New Text', function(Value)
+    Label:UpdateLabel(Value)
+end)
+    
+local ParagraphBox = UpdateSection:CreateTextbox('Update Paragraph', 'New Text', function(Value)
+    Paragraph:UpdateParagraph('Paragraph', Value)
+end)
+    
+local UpdateDropdown1 = UpdateSection:CreateButton('Update Dropdown 1', function()
+    Dropdown:UpdateDropdown({'1', '2', '3'})
+end)
+    
+local UpdateDropdown2 = UpdateSection:CreateButton('Update Dropdown 2', function()
+    Dropdown:UpdateDropdown({'1', '2', '3', '4', '5', '6'})
+end)
 
 local LibraryFunctions = Window:CreateTab('Library Functions', false, 'rbxassetid://3926305904', Vector2.new(484, 44), Vector2.new(36, 36))
 
