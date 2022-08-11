@@ -630,14 +630,6 @@ function Library:CreateWindow(HubName, GameName)
                 UpdateSectionSize()
                 UpdateParagraphSize()
 
-                ParagraphHolder.Changed:Connect(function(Property)
-                    if Property == 'Size' then
-                        UpdateTabSize()
-                        UpdateSectionSize()
-                        UpdateParagraphSize()
-                    end
-                end)
-
                 function ParagraphFunctions:UpdateParagraph(NewTitle, NewParagraph)
                     Old = ParagraphContent.Text
                     ParagraphTitle.Text = NewTitle
