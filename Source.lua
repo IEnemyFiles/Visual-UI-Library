@@ -649,6 +649,8 @@ function Library:CreateWindow(HubName, GameName)
                     Section.Size = Section.Size - UDim2.new(0, 0, 0, TextSizeOld.Y - 5)
                     ParagraphHolder.Size = UDim2.new(0, 410, 0, TextSizeNew.Y + 20)
                     ParagraphContent.Size = UDim2.new(0, 410, 0, TextSizeNew.Y + 20)
+                    Tab.CanvasSize = Tab.CanvasSize + UDim2.new(0, 0, 0, TextSizeNew.Y + 5)
+                    Section.Size = Section.Size + UDim2.new(0, 0, 0, TextSizeNew.Y + 5)
                 end
                 return ParagraphFunctions
             end
