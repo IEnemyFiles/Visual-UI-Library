@@ -644,20 +644,13 @@ function Library:CreateWindow(HubName, GameName)
                     ParagraphContent.Text = NewParagraph
                     local TextSizeNew = TextService:GetTextSize(ParagraphContent.Text, 14, Enum.Font.Gotham, Vector2.new(410, math.huge))
                     local TextSizeOld = TextService:GetTextSize(Old, 14, Enum.Font.Gotham, Vector2.new(410, math.huge))
-                    
-                    if TextSizeNew.Y > TextSizeOld then
-                        Tab.CanvasSize = Tab.CanvasSize + UDim2.new(0, 0, 0, TextSizeNew.Y + 5)
-                        Section.Size = Section.Size + UDim2.new(0, 0, 0, TextSizeNew.Y + 5)
-                        ParagraphHolder.Size = UDim2.new(0, 410, 0, TextSizeNew.Y + 20)
-                        ParagraphContent.Size = UDim2.new(0, 410, 0, TextSizeNew.Y + 20)
-                    else
-                        Tab.CanvasSize = Tab.CanvasSize - UDim2.new(0, 0, 0, TextSizeOld.Y + 5)
-                        Section.Size = Section.Size - UDim2.new(0, 0, 0, TextSizeOld.Y + 5)
-                        Tab.CanvasSize = Tab.CanvasSize + UDim2.new(0, 0, 0, TextSizeNew.Y + 5)
-                        Section.Size = Section.Size + UDim2.new(0, 0, 0, TextSizeNew.Y + 5)
-                        ParagraphHolder.Size = UDim2.new(0, 410, 0, TextSizeNew.Y + 20)
-                        ParagraphContent.Size = UDim2.new(0, 410, 0, TextSizeNew.Y + 20)
-                    end
+
+                    Tab.CanvasSize = Tab.CanvasSize - UDim2.new(0, 0, 0, TextSizeOld.Y - 5)
+                    Section.Size = Section.Size - UDim2.new(0, 0, 0, TextSizeOld.Y - 5)
+                    Tab.CanvasSize = Tab.CanvasSize + UDim2.new(0, 0, 0, TextSizeNew.Y + 5)
+                    Section.Size = Section.Size + UDim2.new(0, 0, 0, TextSizeNew.Y + 5)
+                    ParagraphHolder.Size = UDim2.new(0, 410, 0, TextSizeNew.Y + 20)
+                    ParagraphContent.Size = UDim2.new(0, 410, 0, TextSizeNew.Y + 20)
                 end
                 return ParagraphFunctions
             end
