@@ -1497,6 +1497,7 @@ function Library:CreateWindow(HubName, GameName)
                             Item:Destroy()
                         end
                     end
+                    List = NewList
 
                     for _, Item in next, NewList do
                         Utility:Create('TextButton', {
@@ -1546,7 +1547,7 @@ function Library:CreateWindow(HubName, GameName)
                             Callback(Item)
                             task.wait(0.5)
                             Opened = false
-                            if #List <= 5 then
+                            if #NewList <= 5 then
                                 Utility:Tween(Tab, {CanvasSize = Tab.CanvasSize - UDim2.new(0, 0, 0, DropListLayout.AbsoluteContentSize.Y)}, 0.25)
                                 Utility:Tween(Section, {Size = Section.Size - UDim2.new(0, 0, 0, DropListLayout.AbsoluteContentSize.Y)}, 0.25)
                             else
