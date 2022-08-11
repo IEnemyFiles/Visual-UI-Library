@@ -1850,3 +1850,4 @@ function Library:CreateWindow(HubName, GameName)
     end
     return Tabs
 end
+return Library
