@@ -554,7 +554,7 @@ function Library:CreateWindow(HubName, GameName)
                     Name = Title..'ParagraphHolder',
                     Parent = Section,
                     BackgroundColor3 = Color3.fromRGB(25, 25, 25),
-                    Size = UDim2.new(0, 410, 0, 40)
+                    Size = UDim2.new(0, 410, 0, 37)
                 }, {
                     Utility:Create('UICorner', {
                         CornerRadius = UDim.new(0, 5),
@@ -592,7 +592,7 @@ function Library:CreateWindow(HubName, GameName)
                         Name = Title..'ParagraphContent',
                         BackgroundColor3 = Color3.fromRGB(255, 255, 255),
                         BackgroundTransparency = 1,
-                        Position = UDim2.new(0, 0, 0, 7),
+                        Position = UDim2.new(0, 0, 0, 16),
                         Size = UDim2.new(0, 410, 0, 20),
                         Font = Enum.Font.Gotham,
                         Text = Paragraph,
@@ -617,32 +617,35 @@ function Library:CreateWindow(HubName, GameName)
                 local ParagraphContent = Section[Title..'ParagraphHolder'][Title..'ParagraphContent']
                 local ParagraphTitle = Section[Title..'ParagraphHolder'][Title..'ParagraphTitle']
 
-                function UpdateParagraphSize()
-                    local TextSize = TextService:GetTextSize(ParagraphContent.Text, 14, Enum.Font.Gotham, Vector2.new(410, math.huge))
-
-                    Tab.CanvasSize = Tab.CanvasSize + UDim2.new(0, 0, 0, TextSize.Y + 5)
-                    Section.Size = Section.Size + UDim2.new(0, 0, 0, TextSize.Y + 5)
-                    ParagraphHolder.Size = UDim2.new(0, 410, 0, TextSize.Y + 20)
-                    ParagraphContent.Size = UDim2.new(0, 410, 0, TextSize.Y + 20)
-                end
-
                 UpdateTabSize()
                 UpdateSectionSize()
-                UpdateParagraphSize()
 
                 function ParagraphFunctions:UpdateParagraph(NewTitle, NewParagraph)
                     Old = ParagraphContent.Text
+                    print(Old)
                     ParagraphTitle.Text = NewTitle
                     ParagraphContent.Text = NewParagraph
                     local TextSizeNew = TextService:GetTextSize(ParagraphContent.Text, 14, Enum.Font.Gotham, Vector2.new(410, math.huge))
                     local TextSizeOld = TextService:GetTextSize(Old, 14, Enum.Font.Gotham, Vector2.new(410, math.huge))
 
-                    Tab.CanvasSize = Tab.CanvasSize - UDim2.new(0, 0, 0, TextSizeOld.Y - 5)
-                    Section.Size = Section.Size - UDim2.new(0, 0, 0, TextSizeOld.Y - 5)
-                    ParagraphHolder.Size = UDim2.new(0, 410, 0, TextSizeNew.Y + 20)
-                    ParagraphContent.Size = UDim2.new(0, 410, 0, TextSizeNew.Y + 20)
-                    Tab.CanvasSize = Tab.CanvasSize + UDim2.new(0, 0, 0, TextSizeNew.Y + 5)
-                    Section.Size = Section.Size + UDim2.new(0, 0, 0, TextSizeNew.Y + 5)
+                    if TextSizeNew.Y > 14 and TextSizeNew.Y > TextSizeOld.Y then
+                        Tab.CanvasSize = Tab.CanvasSize - UDim2.new(0, 0, 0, TextSizeOld.Y + 5)
+                        Section.Size = Section.Size - UDim2.new(0, 0, 0, TextSizeOld.Y + 5)
+                        Tab.CanvasSize = Tab.CanvasSize + UDim2.new(0, 0, 0, TextSizeNew.Y + 5)
+                        Section.Size = Section.Size + UDim2.new(0, 0, 0, TextSizeNew.Y + 5)
+                        ParagraphHolder.Size = UDim2.new(0, 410, 0, TextSizeNew.Y + 20)
+                        ParagraphContent.Size = UDim2.new(0, 410, 0, TextSizeNew.Y)
+                        --Tab.CanvasSize = Tab.CanvasSize + UDim2.new(0, 0, 0, TextSizeNew.Y + 5)
+                        --Section.Size = Section.Size + UDim2.new(0, 0, 0, TextSizeNew.Y + 5)
+                    elseif TextSizeNew.Y < TextSizeOld.Y then
+                        Tab.CanvasSize = Tab.CanvasSize - UDim2.new(0, 0, 0, TextSizeOld.Y + 5)
+                        Section.Size = Section.Size - UDim2.new(0, 0, 0, TextSizeOld.Y + 5)
+                        Tab.CanvasSize = Tab.CanvasSize + UDim2.new(0, 0, 0, TextSizeNew.Y + 5)
+                        Section.Size = Section.Size + UDim2.new(0, 0, 0, TextSizeNew.Y + 5)
+                        ParagraphHolder.Size = ParagraphHolder.Size - UDim2.new(0, 0, 0, TextSizeOld.Y)
+                        ParagraphHolder.Size = UDim2.new(0, 410, 0, TextSizeNew.Y + 20)
+                        ParagraphContent.Size = UDim2.new(0, 410, 0, TextSizeNew.Y)
+                    end       
                 end
                 return ParagraphFunctions
             end
